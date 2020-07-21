@@ -9,9 +9,10 @@ import SendIcon from '@material-ui/icons/Send';
 import db from "./Database/firebase";
 import firebase from "firebase";
 import FlipMove from "react-flip-move";
+// import Sound from "./Components/Sound/Sound";
 // import useSound from "use-sound";
-// import boopSfx from './sound1.mp3';
-// import sound from "./sound.mp3"
+// import sound from "./sound1.mp3";
+
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([])
   const [username, setUsername] = useState('')
+  
+
 
   // useState is simply a variable in react
   //  useEffect = run code on a condition
@@ -31,7 +34,9 @@ function App() {
         setMessages(snapshot.docs.map(doc => 
           ({id: doc.id , message: doc.data()})
           ))
+         
     });
+    
   }, [])
 
 
@@ -59,13 +64,10 @@ function App() {
     return input ? true : false //returns true if may laman otherwise wla
   }
 
-  // var audio = new Audio("/sound1.wav")
-   
 
-  // const [playOn] = useSound(
-  //   '/sound1.mp3',
-  //   { volume: 0.90 }
-  // );
+
+
+
 
  const submitHandler = (e) => {
     e.preventDefault();
@@ -75,16 +77,13 @@ function App() {
       username : username,
       timestamp : firebase.firestore.FieldValue.serverTimestamp()
     })
-    // playOn();
+
     // const messageDetail = {username : username, text : input}
     // setMessages([...messages,messageDetail])
-    // audio.play();
+
     setInput("");
  }
 
-
-
-   
 
   return (
     <div className="App">
@@ -114,11 +113,12 @@ function App() {
 
           </IconButton>
           
-{/*           
+          {/*           
           <Button 
-        
           // onClick={sendMessage}
           ></Button> */}
+
+          {/* <Sound /> */}
         </FormControl>
       </form>
       
@@ -133,6 +133,9 @@ function App() {
         
         }
       </FlipMove>
+
+      
+
 
     </div>
   );
